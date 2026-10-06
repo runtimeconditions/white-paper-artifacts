@@ -5,7 +5,7 @@
 
 ## The problem we are addressing
 
-Runtime requirements are commonly scattered across various code artifacts (README files, SDKs, package files, etc), tickets, and conversations. The application team may know that a workload needs a cache, a relational database, an API, and a message bus. The platform team may know how to provide those capabilities in one environment. A gap exists between the two, in discovering the application's requirements consistently, in an automated way, to compare them with existing platform capabilities.
+Runtime requirements are commonly scattered across code artifacts (READMEs, SDKs, package files), tickets, and conversations. An application team may know a workload needs a cache, relational database, API, message bus, AI model runner, vector store, or GPU. The platform team may know how to provide those capabilities in one environment. A gap remains: discovering application requirements consistently and automatically, then comparing them with platform capabilities.
 
 The paper should present Runtime Conditions Profiles as a common reference point between workload demand and platform fulfillment. It should not imply that a profile replaces service catalogs, deployment manifests, or any other platform tooling. Instead, it should explain how a profile can give existing platforms better input for fulfillment automation.
 
@@ -20,7 +20,7 @@ The paper should answer questions such as:
 - How do I describe what my application needs without learning every platform-specific provisioning mechanism?
 - How can runtime requirements be discovered from code, SDKs, frameworks, or package metadata?
 - What should I expect a generated Runtime Conditions Profile to contain?
-- How can I review or validate that profile as part of normal development and CI?
+- How can I test and validate the profile locally (e.g., with container runtimes) before CI?
 
 The paper should respect the developer's goal: ship an application without turning every application team into an infrastructure implementation team.
 
@@ -33,7 +33,7 @@ The paper should answer questions such as:
 - How can a platform receive a clear statement of workload demand before deployment?
 - How can a profile be matched to capabilities offered by a particular environment?
 - How can that workload demand be fulfilled differently in development, production, and regulated environments?
-- How can policy, provisioning, and deployment automation consume the profile?
+- Where is the profile consumed: admission controllers (Kyverno/OPA), GitOps controllers (Argo/Flux), or orchestrators (Crossplane/KubeVela)?
 
 The paper should make the platform boundary explicit: the profile describes demand; the platform decides how that demand is fulfilled.
 
@@ -43,7 +43,7 @@ The paper may also serve:
 
 - SDK and framework authors who can package metadata about the integrations their libraries expose.
 - Service, API, and capability-catalog owners who publish the supply side of an integration.
-- Security engineers who want documented integration requests for auditabilty and compliance checks.
+- Security engineers who use demand profiles to enforce least-privilege runtime guardrails for network policy, IAM, and secret access.
 - CNCF contributors and adjacent ecosystem projects evaluating how a demand-side artifact could complement their existing capabilities.
 
 These readers should be given enough context to see where Runtime Conditions Profiles fit into the SDLC, without necessarily diving into their specific concerns.
@@ -58,7 +58,7 @@ The white paper should:
 
 3. **Give developers and platform engineers a shared mental model.** Use plain language and a memorable restaurant analogy, then connect that analogy to a small number of concrete technical examples.
 
-4. **Make the workflow tangible.** Include a step-by-step flowchart and demos that show how signals from application code or SDK metadata can become a validated profile and then drive platform automation. Each demo should solve a real-world platform/deployment challenge, using CNCF projects where possible.
+4. **Make the workflow tangible.** Include a step-by-step flowchart and demos showing how code or SDK metadata becomes a validated profile and drives platform automation. Use CNCF projects where possible (e.g., Backstage, NATS, Crossplane, Kyverno, Cilium).
 
 5. **Show environment-specific fulfillment.** Demonstrate that one workload's demand can be fulfilled by different implementations in different environments while the application-facing intent remains stable.
 
@@ -74,16 +74,16 @@ The white paper should:
 
 ### In scope
 
-- **Problem and model:** Explain Runtime Conditions Profiles as a portable, demand-side description of a workload's runtime integrations, and show how profiles connect application integration requirements with a platform's capability catalog.
+- **Problem and model:** Explain Runtime Conditions Profiles as a portable, demand-side description of a workload's runtime integrations, how they connect application requirements with a platform's capability catalog, and how profiles are packaged as OCI artifacts via the Referrers API.
 - **Restaurant analogy:** Use the diner, concierge, restaurant, menu, and order to explain the relationship between an application, platform engineering, platform capabilities, and environment-specific fulfillment.
 - **Deployment workflow:** Include at least one visual, step-by-step flow from code and/or SDK mappings to a generated profile, platform fulfillment, and deployment.
 - **Representative examples and demos:** Use a small number of examples that highlight the use of CNCF projects to demonstrate platform automation - e.g. API matching in Backstage resulting in the generation of CiliumNetworkPolicies.
 - **Getting started and organizational adoption:** Give readers a clear guide for onboarding and explain how teams can introduce the profile as a shared contract without replacing their existing systems.
-- **Getting involved:** Point readers to the GitHub organization, issues, discussions, and demo suitesa as well as guidance for proposing extensions and identifying downstream use cases.
+- **Getting involved:** Point readers to the GitHub organization, issues, discussions, and demo suites, with guidance for proposing extensions and identifying downstream use cases.
 
 ### Out of scope
 
 - **Exhaustive coverage:** Listing an inventory of every integration, provider, SDK, cloud service, vendor, or extension.
 - **Implementation prescription:** Going too deep into one platform architecture, deployment engine, catalog product, infrastructure provider, or fulfillment implementation.
 - **Full technical reference:** Duplicating the complete specification, conformance requirements, extension-authoring guidance, or language-profiler documentation.
-- **Roadmap and endorsement:** Defining a roadmap or imply CNCF endorsement of the current specification, implementation, or a single adoption path - things that should live in GitHub issues and discussions.
+- **Roadmap and endorsement:** Defining a roadmap or implying CNCF endorsement of the current specification, implementation, or a single adoption path; these belong in GitHub issues and discussions.
