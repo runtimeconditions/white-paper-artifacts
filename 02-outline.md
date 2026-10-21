@@ -10,13 +10,13 @@
 
 1.1 Runtime needs scattered across source, SDKs, and conversations
 1.2 Non-standardized discovery, clunky onboarding, and deployment failures
-1.3 Paper thesis: a portable demand profile indicates workload demands from platform capabilities
+1.3 Paper thesis: a portable demand profile decouples workload intent from platform-specific fulfillment
 
 ### 2. The model: demand before fulfillment
 
 2.1 Workload demand: required integrations and configuration inputs
 2.2 Platform fulfillment: environment-specific matching and delivery
-2.3 Restaurant analogy: diner, concierge, restaurant, order
+2.3 Real-world analogy: diner (workload), waiter/concierge (profile), kitchen (platform), dishes (fulfillment)
 2.4 Boundary: profiles describe demand; platforms choose how to meet it
 
 ### 3. The profile as a shared contract
@@ -24,7 +24,7 @@
 3.1 Compact example: checkout service with cache and datastore needs
 3.2 Profile essentials: workload identity, conditions, interfaces, extensions
 3.3 Validation: structure, added extension vocabulary
-3.4 Portability and safety: no provider choice, target topology, or secret values
+3.4 Portability and safety: strict separation of demand from environment topology, provider implementation, and raw credentials/secret values
 
 ### 4. From workload signals to a validated profile
 
@@ -42,7 +42,7 @@
 5.2 Catalogs, adapters, policy, and deployment workflows
 5.3 Configuration binding and service delivery
 5.4 Environment-specific choices: local development, production, regulated environments; defaults vs options
-5.5 Early failure cases: unsupported capability, incompatible API, missing binding, policy violation
+5.5 Early validation and failure classification: static capability gaps, API incompatibility, missing bindings, and policy non-compliance
 
 **Figure:** Profile → capability match → policy and fulfillment → deployment
 
@@ -93,7 +93,7 @@
 ### 11. Boundaries and open questions
 
 11.1 Discovery quality and generator limits
-11.2 Vocabulary and interoperability, including AI and accelerator requirements
+11.2 Standardizing condition schemas and extensible vocabularies (e.g., AI/accelerator specs)
 11.3 Platform-specific adapters and fulfillment responsibility
 11.4 Community review questions; no roadmap or CNCF endorsement claims
 
